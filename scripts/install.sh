@@ -289,6 +289,7 @@ IAMUserARN=$(aws sts get-caller-identity --query "Arn" --output text)
 cd ${PACKAGE_ROOT}
 yarn install --frozen-lockfile
 yarn run release
+yarn add --dev serverless-better-credentials
 
 touch serverless_config.json
 if ! grep -Fq "devAwsUserAccountArn" serverless_config.json; then
