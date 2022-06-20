@@ -80,8 +80,8 @@ provider:
     EXPORT_REQUEST_TABLE_JOB_STATUS_INDEX: '${self:custom.exportRequestTableJobStatusIndex}'
     FHIR_BINARY_BUCKET: !Ref FHIRBinaryBucket
     ELASTICSEARCH_DOMAIN_ENDPOINT: !Join ['', ['https://', !GetAtt ElasticSearchDomain.DomainEndpoint]]
-    OAUTH2_DOMAIN_ENDPOINT:
-      !Join ['', ['https://', !Ref UserPoolDomain, !Sub '.auth.${AWS::Region}.amazoncognito.com/oauth2']]
+    OAUTH2_DOMAIN_ENDPOINT: 'https://keycloak.mxkxmoris.com/auth/realms/FhirSample/protocol/openid-connect/'
+      # !Join ['', ['https://', !Ref UserPoolDomain, !Sub '.auth.${AWS::Region}.amazoncognito.com/oauth2']]
     EXPORT_RESULTS_BUCKET: !Ref BulkExportResultsBucket
     EXPORT_RESULTS_SIGNER_ROLE_ARN: !GetAtt ExportResultsSignerRole.Arn
     CUSTOM_USER_AGENT: 'AwsSolution/SO0128/GH-v4.3.0'
@@ -107,16 +107,16 @@ functions:
     role: FhirServerLambdaRole
     events:
       - http:
-          authorizer:
-            type: COGNITO_USER_POOLS
-            authorizerId: !Ref ApiGatewayAuthorizer
+          # authorizer:
+          #   type: COGNITO_USER_POOLS
+          #   authorizerId: !Ref ApiGatewayAuthorizer
           method: ANY
           path: /
           private: true
       - http:
-          authorizer:
-            type: COGNITO_USER_POOLS
-            authorizerId: !Ref ApiGatewayAuthorizer
+          # authorizer:
+          #   type: COGNITO_USER_POOLS
+          #   authorizerId: !Ref ApiGatewayAuthorizer
           method: ANY
           path: '{proxy+}'
           private: true
@@ -265,10 +265,10 @@ resources:
         Type: String
         Default: ${self:custom.stage}
         Description: 'The deployment stage (e.g. dev, qa, prod). Default: dev'
-      CognitoOAuthDefaultRedirectURL:
-        Type: String
-        Default: ${self:custom.oauthRedirect}
-        Description: "Cognito's default OAuth redirect URL used for User Pool. Default:  ${self:custom.oauthRedirect}"
+      # OAuthCognitoDefaultRedirectURL:
+      #   Type: String
+      #   Default: ${self:custom.oauthRedirect}
+      #   Description: "Cognito's default OAuth redirect URL used for User Pool. Default:  ${self:custom.oauthRedirect}"
       ExportGlueWorkerType:
         Type: String
         Default: 'G.2X'
@@ -504,19 +504,19 @@ resources:
             KMSMasterKeyId: !Ref DynamodbKMSKey
             SSEEnabled: true
             SSEType: 'KMS'
-      ApiGatewayAuthorizer:
-        Type: AWS::ApiGateway::Authorizer
-        Properties:
-          AuthorizerResultTtlInSeconds: 300
-          IdentitySource: method.request.header.Authorization
-          RestApiId: !Ref ApiGatewayRestApi
-          Type: COGNITO_USER_POOLS
-          Name: !Join ['-', [fhir-works-authorizer, !Ref Stage, !Ref AWS::Region]]
-          ProviderARNs:
-            - !Join [
-                '',
-                [!Sub 'arn:${AWS::Partition}:cognito-idp:${AWS::Region}:${AWS::AccountId}:userpool/', !Ref UserPool],
-              ]
+      # ApiGatewayAuthorizer:
+      #   Type: AWS::ApiGateway::Authorizer
+      #   Properties:
+      #     AuthorizerResultTtlInSeconds: 300
+      #     IdentitySource: method.request.header.Authorization
+      #     RestApiId: !Ref ApiGatewayRestApi
+      #     Type: COGNITO_USER_POOLS
+      #     Name: !Join ['-', [fhir-works-authorizer, !Ref Stage, !Ref AWS::Region]]
+      #     ProviderARNs:
+      #       - !Join [
+      #           '',
+      #           [!Sub 'arn:${AWS::Partition}:cognito-idp:${AWS::Region}:${AWS::AccountId}:userpool/', !Ref UserPool],
+      #         ]
       FHIRBinaryBucket:
         Type: AWS::S3::Bucket
         DeletionPolicy: Retain
@@ -1101,17 +1101,17 @@ resources:
   - ${file(cloudformation/alarms.yaml)}
   - ${file(cloudformation/kms.yaml)}
   - ${file(cloudformation/elasticsearch.yaml)}
-  - ${file(cloudformation/cognito.yaml)}
+  # - ${file(cloudformation/cognito.yaml)}
   - ${file(cloudformation/bulkExport.yaml)}
   - ${file(cloudformation/subscriptions.yaml)}
   - ${file(cloudformation/vpc.yaml)}
   - Outputs:
-      UserPoolId:
-        Description: User pool id for the provisioning users.
-        Value: !Ref UserPool
-      UserPoolAppClientId:
-        Description: App client id for the provisioning users.
-        Value: !Ref UserPoolClient
+      # UserPoolId:
+      #   Description: User pool id for the provisioning users.
+      #   Value: !Ref UserPool
+      # UserPoolAppClientId:
+      #   Description: App client id for the provisioning users.
+      #   Value: !Ref UserPoolClient
       FHIRBinaryBucket:
         Description: S3 Bucket for storing Binary Objects
         Value: !Ref FHIRBinaryBucket

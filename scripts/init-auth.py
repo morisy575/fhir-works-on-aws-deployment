@@ -10,17 +10,22 @@ client = boto3.client('cognito-idp', region_name=sys.argv[2])
 '''
 example run:
 python3 init-auth.py <ClientId> <Region>
-python3 init-auth.py 12pgvi3gsl32qp9h8lg130arr0 us-west-2
+python3 scripts/init-auth.py ihc5m6ng7na3b2pu1bfq738ds us-east-1
 '''
 response = client.initiate_auth(
     AuthFlow='USER_PASSWORD_AUTH',
+    # AuthParameters={
+    #     'USERNAME': 'workshopuser',
+    #     'PASSWORD': 'Master123!'
+    # },
+    
     AuthParameters={
-        'USERNAME': 'workshopuser',
-        'PASSWORD': 'Master123!'
+        'USERNAME': 'test-user-1',
+        'PASSWORD': 'Mmp-qwerty5'
     },
 
     ClientId=sys.argv[1]
 )
 
 id_token = response['AuthenticationResult']['IdToken']
-print(id_token)
+print(response)

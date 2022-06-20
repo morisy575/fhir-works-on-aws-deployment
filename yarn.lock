@@ -5809,60 +5809,60 @@ fecha@^4.2.0:
   resolved "https://registry.yarnpkg.com/fecha/-/fecha-4.2.1.tgz#0a83ad8f86ef62a091e22bb5a039cd03d23eecce"
   integrity sha512-MMMQ0ludy/nBs1/o0zVOiKTpG7qMbonKUzjJgQFEuvq6INZ1OraKPRAWkBq5vlKLOUMpmNYG1JoN3oDPUQ9m3Q==
 
-fhir-works-on-aws-authz-rbac@5.0.0:
+fhir-works-on-aws-authz-rbac@./.yalc/fhir-works-on-aws-authz-rbac:
   version "5.0.0"
-  resolved "https://registry.yarnpkg.com/fhir-works-on-aws-authz-rbac/-/fhir-works-on-aws-authz-rbac-5.0.0.tgz#93d60930f0601e9be72de55c6ce23976230d0519"
-  integrity sha512-ZYy5A1aHU2xFBDTEtHSYdj8dA7vvbB3vD2wu0+ttGX5iOnV1J8EeTGX+kXtVky/nlm43qKrPxb5RbPHIUJiQWg==
   dependencies:
-    fhir-works-on-aws-interface "^10.0.0"
+    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-authz-rbac-5.0.0-113acbbc-2b13-4d1f-b29e-eef306db0bf1-1654766665350/node_modules/fhir-works-on-aws-authz-rbac/.yalc/fhir-works-on-aws-interface"
     jsonwebtoken "^8.5.1"
     lodash "^4.17.20"
 
-fhir-works-on-aws-interface@12.0.0, fhir-works-on-aws-interface@^12.0.0:
-  version "12.0.0"
-  resolved "https://registry.yarnpkg.com/fhir-works-on-aws-interface/-/fhir-works-on-aws-interface-12.0.0.tgz#3e9149ab953c5d3fd27bc8bb63b92e541057697f"
-  integrity sha512-gr5vFyEyktPgL6XPOTcbRqTQxOdJgB0QF8+q6nvto+hoAi30SH5YIYoJnsnX2ZM1ECnkSSeakMK2RbAVM6nImg==
-  dependencies:
-    winston "^3.3.3"
-    winston-transport "^4.4.0"
-
-fhir-works-on-aws-interface@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/fhir-works-on-aws-interface/-/fhir-works-on-aws-interface-10.0.0.tgz#5ad0599e55b40c7be1f9ef0cf9252d6da1f8d20a"
-  integrity sha512-JQ/eICquJlI5P6s7e1xiuABnPuhh4d7VeyPFc5OFHgpLbyBCTrbyz0gVMc3BdlQVXQ7IAa0HYgjNsLMoeFt2JA==
-  dependencies:
-    winston "^3.3.3"
-    winston-transport "^4.4.0"
-
-fhir-works-on-aws-interface@^12.1.0:
+fhir-works-on-aws-interface@./.yalc/fhir-works-on-aws-interface:
   version "12.1.0"
-  resolved "https://registry.yarnpkg.com/fhir-works-on-aws-interface/-/fhir-works-on-aws-interface-12.1.0.tgz#74ff054cdf22eae0122c9ec32562475bcdd2cccf"
-  integrity sha512-LYbmbNz+CzPvH0QH+Sn8zEFzdfSUDd17hC5xjbMrxHOzQSuNEpIELbQ/rdtiNXc+V3xFsQubYsXoHl69wHZN3w==
   dependencies:
     winston "^3.3.3"
     winston-transport "^4.4.0"
 
-fhir-works-on-aws-persistence-ddb@3.11.0:
+"fhir-works-on-aws-interface@file:.yalc/fhir-works-on-aws-authz-rbac/.yalc/fhir-works-on-aws-interface":
+  version "12.1.0"
+  dependencies:
+    winston "^3.3.3"
+    winston-transport "^4.4.0"
+
+"fhir-works-on-aws-interface@file:.yalc/fhir-works-on-aws-persistence-ddb/.yalc/fhir-works-on-aws-interface":
+  version "12.1.0"
+  dependencies:
+    winston "^3.3.3"
+    winston-transport "^4.4.0"
+
+"fhir-works-on-aws-interface@file:.yalc/fhir-works-on-aws-routing/.yalc/fhir-works-on-aws-interface":
+  version "12.1.0"
+  dependencies:
+    winston "^3.3.3"
+    winston-transport "^4.4.0"
+
+"fhir-works-on-aws-interface@file:.yalc/fhir-works-on-aws-search-es/.yalc/fhir-works-on-aws-interface":
+  version "12.1.0"
+  dependencies:
+    winston "^3.3.3"
+    winston-transport "^4.4.0"
+
+fhir-works-on-aws-persistence-ddb@./.yalc/fhir-works-on-aws-persistence-ddb:
   version "3.11.0"
-  resolved "https://registry.yarnpkg.com/fhir-works-on-aws-persistence-ddb/-/fhir-works-on-aws-persistence-ddb-3.11.0.tgz#517d3039cc0f09ade43d5768cf28e3a731067067"
-  integrity sha512-UIEyBuCxR1XfuMrNyzVbq/LGJg2uDJrNFa3R4USt0lMomP4ZlTDIu7s4n3/vvcEHgewFPmyzNqvfgzRdH7UJpg==
   dependencies:
     "@elastic/elasticsearch" "7.13.0"
     "@types/aws-lambda" "^8.10.83"
     aws-elasticsearch-connector "^8.2.0"
     aws-sdk "^2.1000.0"
     aws-xray-sdk "^3.3.3"
-    fhir-works-on-aws-interface "^12.1.0"
+    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-persistence-ddb-3.11.0-03c5b865-801d-4425-8e1f-0bbbcb51aa5c-1654766665426/node_modules/fhir-works-on-aws-persistence-ddb/.yalc/fhir-works-on-aws-interface"
     flat "^5.0.2"
     lodash "^4.17.20"
     mime-types "^2.1.26"
     promise.allsettled "^1.0.2"
     uuid "^3.4.0"
 
-fhir-works-on-aws-routing@6.5.0:
+fhir-works-on-aws-routing@./.yalc/fhir-works-on-aws-routing:
   version "6.5.0"
-  resolved "https://registry.yarnpkg.com/fhir-works-on-aws-routing/-/fhir-works-on-aws-routing-6.5.0.tgz#98ed2e765b729337d3f932853140e97c7933313b"
-  integrity sha512-PBe09TZ+SsZ78GxgZDlZb7jXF0y2oAtZDveGvdfg/MRlATlYZLo2OBO+nBSIj4Ag6S92H3LGPV3mq+XFQjvhMQ==
   dependencies:
     "@types/cors" "^2.8.7"
     "@types/express-serve-static-core" "^4.17.2"
@@ -5873,7 +5873,7 @@ fhir-works-on-aws-routing@6.5.0:
     cors "^2.8.5"
     errorhandler "^1.5.1"
     express "^4.17.1"
-    fhir-works-on-aws-interface "^12.1.0"
+    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-routing-6.5.0-4ef3975b-8649-4caf-bc9c-5e419ec5d660-1654766665495/node_modules/fhir-works-on-aws-routing/.yalc/fhir-works-on-aws-interface"
     flat "^5.0.0"
     http-errors "^1.8.0"
     lodash "^4.17.15"
@@ -5881,10 +5881,8 @@ fhir-works-on-aws-routing@6.5.0:
     serverless-http "^2.3.1"
     uuid "^3.4.0"
 
-fhir-works-on-aws-search-es@3.12.0:
+fhir-works-on-aws-search-es@./.yalc/fhir-works-on-aws-search-es:
   version "3.12.0"
-  resolved "https://registry.yarnpkg.com/fhir-works-on-aws-search-es/-/fhir-works-on-aws-search-es-3.12.0.tgz#6d6164dcc43342a71d72a9b38149c8139214c5f4"
-  integrity sha512-XqeKXNfFrh+ZoAApy6Uk4y83Kf/xigAqbYvo01NLeUZx8a7JWTumt61l2IZAm9mu0LJIWOuv78XATagAuMDXJQ==
   dependencies:
     "@aws-sdk/client-sns" "^3.50.0"
     "@aws-sdk/node-http-handler" "^3.52.0"
@@ -5894,7 +5892,7 @@ fhir-works-on-aws-search-es@3.12.0:
     aws-sdk "^2.1072.0"
     aws-xray-sdk "^3.3.4"
     date-fns "^2.19.0"
-    fhir-works-on-aws-interface "^12.0.0"
+    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-search-es-3.12.0-89d33a04-f20c-49fc-aa75-7c3922df090a-1654766665565/node_modules/fhir-works-on-aws-search-es/.yalc/fhir-works-on-aws-interface"
     flat "^5.0.2"
     lodash "^4.17.20"
     nearley "^2.20.0"
@@ -9024,6 +9022,11 @@ open@^8.4.0:
     define-lazy-prop "^2.0.0"
     is-docker "^2.1.1"
     is-wsl "^2.2.0"
+
+optional@^0.1.3:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/optional/-/optional-0.1.4.tgz#cdb1a9bedc737d2025f690ceeb50e049444fd5b3"
+  integrity sha512-gtvrrCfkE08wKcgXaVwQVgwEQ8vel2dc5DDBn9RLQZ3YtmtkBss6A2HY6BnJH4N/4Ku97Ri/SF8sNWE2225WJw==
 
 optionator@^0.8.1:
   version "0.8.3"
