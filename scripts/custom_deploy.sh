@@ -1,3 +1,4 @@
+export AWS_SDK_LOAD_CONFIG=1
 export PACKAGE_ROOT=${PWD%/*}
 IAMUserARN=$(aws sts get-caller-identity --query "Arn" --output text)
 
