@@ -44,7 +44,7 @@
     "fhir-works-on-aws-search-es": "./.yalc/fhir-works-on-aws-search-es",
     "lodash": "^4.17.21",
     "p-settle": "^4.1.1",
-    "serverless": "^3.19.0",
+    "serverless": "^3.21.0",
     "serverless-better-credentials": "^1.1.2",
     "serverless-http": "^2.7.0",
     "tslib": "^2.3.1",

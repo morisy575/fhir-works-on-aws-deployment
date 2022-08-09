@@ -7,85 +7,158 @@ Resources:
   VPC:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: 10.0.0.0/16
+      CidrBlock: 11.0.0.0/16
       EnableDnsSupport: true
       EnableDnsHostnames: true
       Tags:
         - Key: Name
           Value: FHIR Dev VPC
-  
-  # IGW
-  InternetGateway:
-    Type: AWS::EC2::InternetGateway
-    Properties:
-      Tags:
-        - Key: Name
-          Value: FHIR Dev IGW
 
-  InternetGatewayAttachment:
-    Type: AWS::EC2::VPCGatewayAttachment
-    Properties:
-      InternetGatewayId: !Ref InternetGateway
-      VpcId: !Ref VPC
-
-  # Subnets
-  PublicSubnet:
+  # Private Subnets for VPN
+  VpnPrivateSubnetA:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
       AvailabilityZone: !Select [ 0, !GetAZs  '' ]
-      CidrBlock: 10.0.0.0/24
-      MapPublicIpOnLaunch: true
-      Tags:
-        - Key: Name
-          Value: Public Subnet for FHIR Dev's NAT Gateway
-
-  PrivateSubnet:
-    Type: AWS::EC2::Subnet
-    Properties:
-      VpcId: !Ref VPC
-      AvailabilityZone: !Select [ 0, !GetAZs  '' ]
-      CidrBlock: 10.0.1.0/24
+      CidrBlock: 11.0.10.0/24
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
-          Value: Private Subnet for FHIR Dev
+          Value: Private Subnet A for VPN connection
   
-  # NAT Gateway
-  NatGatewayEIP:
-    Type: AWS::EC2::EIP
-    DependsOn: InternetGatewayAttachment
-    Properties:
-      Domain: vpc
-
-  NatGateway:
-    Type: AWS::EC2::NatGateway
-    Properties:
-      AllocationId: !GetAtt NatGatewayEIP.AllocationId
-      SubnetId: !Ref PublicSubnet
-  
-  # Public Subnet's Route Table
-  PublicRouteTable:
-    Type: AWS::EC2::RouteTable
+  VpnPrivateSubnetB:
+    Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 1, !GetAZs  '' ]
+      CidrBlock: 11.0.11.0/24
+      MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
-          Value: Public Routes
+          Value: Private Subnet B for VPN connection
 
-  DefaultPublicRoute:
-    Type: AWS::EC2::Route
-    DependsOn: InternetGatewayAttachment
+  # Private Subnets for ElasticSearch Service
+  ESPrivateSubnetA:
+    Type: AWS::EC2::Subnet
     Properties:
-      RouteTableId: !Ref PublicRouteTable
-      DestinationCidrBlock: 0.0.0.0/0
-      GatewayId: !Ref InternetGateway
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 0, !GetAZs  '' ]
+      CidrBlock: 11.0.20.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: Private Subnet A for ES
+  
+  ESPrivateSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 1, !GetAZs  '' ]
+      CidrBlock: 11.0.21.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: Private Subnet B for ES
+  
+  # Private Subnets for API Gw
+  ApiGwPrivateSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 0, !GetAZs  '' ]
+      CidrBlock: 11.0.30.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: Private Subnet A for ApiGw
+  
+  ApiGwPrivateSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 1, !GetAZs  '' ]
+      CidrBlock: 11.0.31.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: Private Subnet B for ApiGw
+  
+  # Private Subnets for Keycloak
+  KeycloakPrivateSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 0, !GetAZs  '' ]
+      CidrBlock: 11.0.40.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: Private Subnet A for Keycloak
+  
+  KeycloakPrivateSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 1, !GetAZs  '' ]
+      CidrBlock: 11.0.41.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: Private Subnet B for Keycloak
+  
+  # # NAT Gateway
+  # NatGatewayAEIP:
+  #   Type: AWS::EC2::EIP
+  #   DependsOn: InternetGatewayAttachment
+  #   Properties:
+  #     Domain: vpc
+  
+  # NatGatewayBEIP:
+  #   Type: AWS::EC2::EIP
+  #   DependsOn: InternetGatewayAttachment
+  #   Properties:
+  #     Domain: vpc
 
-  PublicSubnetRouteTableAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      RouteTableId: !Ref PublicRouteTable
-      SubnetId: !Ref PublicSubnet
+  # NatGatewayA:
+  #   Type: AWS::EC2::NatGateway
+  #   Properties:
+  #     AllocationId: !GetAtt NatGatewayAEIP.AllocationId
+  #     SubnetId: !Ref PublicSubnetA
+  
+  # NatGatewayB:
+  #   Type: AWS::EC2::NatGateway
+  #   Properties:
+  #     AllocationId: !GetAtt NatGatewayBEIP.AllocationId
+  #     SubnetId: !Ref PublicSubnetB
+  
+  # # Public Subnet's Route Table
+  # PublicRouteTable:
+  #   Type: AWS::EC2::RouteTable
+  #   Properties:
+  #     VpcId: !Ref VPC
+  #     Tags:
+  #       - Key: Name
+  #         Value: Public Routes
+
+  # DefaultPublicRoute:
+  #   Type: AWS::EC2::Route
+  #   DependsOn: InternetGatewayAttachment
+  #   Properties:
+  #     RouteTableId: !Ref PublicRouteTable
+  #     DestinationCidrBlock: 0.0.0.0/0
+  #     GatewayId: !Ref InternetGateway
+
+  # PublicSubnetARouteTableAssociation:
+  #   Type: AWS::EC2::SubnetRouteTableAssociation
+  #   Properties:
+  #     RouteTableId: !Ref PublicRouteTable
+  #     SubnetId: !Ref PublicSubnetA
+  
+  # PublicSubnetBRouteTableAssociation:
+  #   Type: AWS::EC2::SubnetRouteTableAssociation
+  #   Properties:
+  #     RouteTableId: !Ref PublicRouteTable
+  #     SubnetId: !Ref PublicSubnetB
   
   # Private Subnet's Route Table
   PrivateRouteTable:
@@ -96,20 +169,64 @@ Resources:
         - Key: Name
           Value: !Sub Private Routes
 
-  DefaultPrivateRoute:
-    Type: AWS::EC2::Route
-    Properties:
-      RouteTableId: !Ref PrivateRouteTable
-      DestinationCidrBlock: 0.0.0.0/0
-      NatGatewayId: !Ref NatGateway
-
-  PrivateSubnet1RouteTableAssociation:
+  VpnPrivateSubnetARouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       RouteTableId: !Ref PrivateRouteTable
-      SubnetId: !Ref PrivateSubnet
+      SubnetId: !Ref VpnPrivateSubnetA
+  
+  VpnPrivateSubnetBRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref VpnPrivateSubnetB
+  
+  ESPrivateSubnetARouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref ESPrivateSubnetA
+  
+  ESPrivateSubnetBRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref ESPrivateSubnetB
 
-  # VPC Endpoint for SSM
+  ApiGwPrivateSubnetARouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref ApiGwPrivateSubnetA
+  
+  ApiGwPrivateSubnetBRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref ApiGwPrivateSubnetB
+
+  # Private Subnet's Route Table
+  KeycloakPrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Sub Keycloak Private Subnet's Routes
+  
+  KeycloakPrivateSubnetARouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref KeycloakPrivateRouteTable
+      SubnetId: !Ref KeycloakPrivateSubnetA
+  
+  KeycloakPrivateSubnetBRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref KeycloakPrivateRouteTable
+      SubnetId: !Ref KeycloakPrivateSubnetB
+
+  # Security Group for Private API GW's VPC Endpoint 
   EndpointSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -122,7 +239,7 @@ Resources:
         - IpProtocol: tcp
           FromPort: 443
           ToPort: 443
-          CidrIp: 10.0.0.0/16
+          CidrIp: 11.0.0.0/16
   
   EndpointSSM:
     Type: AWS::EC2::VPCEndpoint
@@ -132,7 +249,7 @@ Resources:
         - !Ref EndpointSecurityGroup
       ServiceName: !Sub com.amazonaws.${AWS::Region}.ssm
       SubnetIds:
-        - !Ref PrivateSubnet
+        - !Ref KeycloakPrivateSubnetA
       VpcEndpointType: Interface
       VpcId: !Ref VPC
 
@@ -144,7 +261,7 @@ Resources:
         - !Ref EndpointSecurityGroup
       ServiceName: !Sub com.amazonaws.${AWS::Region}.ssmmessages
       SubnetIds:
-        - !Ref PrivateSubnet
+        - !Ref KeycloakPrivateSubnetA
       VpcEndpointType: Interface
       VpcId: !Ref VPC
 
@@ -156,7 +273,7 @@ Resources:
         - !Ref EndpointSecurityGroup
       ServiceName: !Sub com.amazonaws.${AWS::Region}.ec2messages
       SubnetIds:
-        - !Ref PrivateSubnet
+        - !Ref KeycloakPrivateSubnetA
       VpcEndpointType: Interface
       VpcId: !Ref VPC
   
@@ -195,35 +312,74 @@ Resources:
         - Key: Name
           Value: FhirEC2SecurityGroup
 
-  EC2Instance:
-    Type: AWS::EC2::Instance
-    Properties:
-      ImageId: ami-02b92c281a4d3dc79
-      InstanceType: t2.micro
-      SubnetId: !Ref PrivateSubnet
-      SecurityGroupIds:
-        - !Ref EC2SecurityGroup
-      IamInstanceProfile: !Ref EC2InstanceProfile
-      BlockDeviceMappings:
-        - DeviceName: /dev/xvda
-          Ebs:
-            VolumeSize: 100
-            VolumeType: gp2
-      KeyName: FhirEc2Key
-      Tags:
-        - Key: Name
-          Value: FhirEC2Instance
+  # EC2Instance:
+    # Type: AWS::EC2::Instance
+    # Properties:
+    #   ImageId: ami-02b92c281a4d3dc79
+    #   InstanceType: t2.micro
+    #   SubnetId: !Ref PrivateSubnet
+    #   SecurityGroupIds:
+    #     - !Ref EC2SecurityGroup
+    #   IamInstanceProfile: !Ref EC2InstanceProfile
+    #   BlockDeviceMappings:
+    #     - DeviceName: /dev/xvda
+    #       Ebs:
+    #         VolumeSize: 100
+    #         VolumeType: gp2
+    #   Tags:
+    #     - Key: Name
+    #       Value: FHIR Instance for checking VPN 
 
 
   # VPC Endpoint for Private API GW
   EndpointPrivateAPIGW:
     Type: AWS::EC2::VPCEndpoint
     Properties:
-      PrivateDnsEnabled: true
+      PrivateDnsEnabled: false
       SecurityGroupIds:
         - !Ref EndpointSecurityGroup
       ServiceName: !Sub com.amazonaws.${AWS::Region}.execute-api
       SubnetIds:
-        - !Ref PrivateSubnet
+        - !Ref ApiGwPrivateSubnetA
+        - !Ref ApiGwPrivateSubnetB
       VpcEndpointType: Interface
       VpcId: !Ref VPC
+
+
+  # Client VPN Endpoint
+  ClientVpnEndpoint: 
+    Type: AWS::EC2::ClientVpnEndpoint
+    Properties:
+      Description: "Client VPN Endpoint"
+      AuthenticationOptions: 
+        - Type: certificate-authentication
+          MutualAuthentication:
+            ClientRootCertificateChainArn: arn:aws:acm:us-west-2:823715351041:certificate/a3096ed7-4c60-4ea0-8b40-eca732985eda
+      ClientCidrBlock: 100.64.0.0/22
+      ConnectionLogOptions: 
+        Enabled: true
+        CloudwatchLogGroup: /aws/clientvpn
+        CloudwatchLogStream: connection-log
+      ServerCertificateArn: arn:aws:acm:us-west-2:823715351041:certificate/87b9db24-6faa-4c85-be53-532c098c9133
+      SplitTunnel: true
+      VpcId: !Ref VPC
+
+  # Association to Client VPC Endpoint
+  VpnNetworkAssociationA:
+      Type: AWS::EC2::ClientVpnTargetNetworkAssociation
+      Properties:
+        ClientVpnEndpointId: !Ref ClientVpnEndpoint
+        SubnetId: !Ref VpnPrivateSubnetA
+  VpnNetworkAssociationB:
+    Type: AWS::EC2::ClientVpnTargetNetworkAssociation
+    Properties:
+      ClientVpnEndpointId: !Ref ClientVpnEndpoint
+      SubnetId: !Ref VpnPrivateSubnetB
+  
+  # VpnAuthzRule
+  VpnAuthRule:
+    Type: "AWS::EC2::ClientVpnAuthorizationRule"
+    Properties:
+      ClientVpnEndpointId: !Ref ClientVpnEndpoint
+      AuthorizeAllGroups: true
+      TargetNetworkCidr: 11.0.0.0/16
