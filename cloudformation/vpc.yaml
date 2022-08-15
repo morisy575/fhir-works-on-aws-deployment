@@ -38,7 +38,7 @@ Resources:
           Value: Private Subnet B for VPN connection
 
   # Private Subnets for ElasticSearch Service
-  ESPrivateSubnetA:
+  S3PrivateSubnetA:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
@@ -49,7 +49,7 @@ Resources:
         - Key: Name
           Value: Private Subnet A for ES
   
-  ESPrivateSubnetB:
+  S3PrivateSubnetB:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
@@ -181,17 +181,17 @@ Resources:
       RouteTableId: !Ref PrivateRouteTable
       SubnetId: !Ref VpnPrivateSubnetB
   
-  ESPrivateSubnetARouteTableAssociation:
+  S3PrivateSubnetARouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       RouteTableId: !Ref PrivateRouteTable
-      SubnetId: !Ref ESPrivateSubnetA
+      SubnetId: !Ref S3PrivateSubnetA
   
-  ESPrivateSubnetBRouteTableAssociation:
+  S3PrivateSubnetBRouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       RouteTableId: !Ref PrivateRouteTable
-      SubnetId: !Ref ESPrivateSubnetB
+      SubnetId: !Ref S3PrivateSubnetB
 
   ApiGwPrivateSubnetARouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
@@ -205,28 +205,7 @@ Resources:
       RouteTableId: !Ref PrivateRouteTable
       SubnetId: !Ref ApiGwPrivateSubnetB
 
-  # Private Subnet's Route Table
-  KeycloakPrivateRouteTable:
-    Type: AWS::EC2::RouteTable
-    Properties:
-      VpcId: !Ref VPC
-      Tags:
-        - Key: Name
-          Value: !Sub Keycloak Private Subnet's Routes
-  
-  KeycloakPrivateSubnetARouteTableAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      RouteTableId: !Ref KeycloakPrivateRouteTable
-      SubnetId: !Ref KeycloakPrivateSubnetA
-  
-  KeycloakPrivateSubnetBRouteTableAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      RouteTableId: !Ref KeycloakPrivateRouteTable
-      SubnetId: !Ref KeycloakPrivateSubnetB
-
-  # Security Group for Private API GW's VPC Endpoint 
+  # Security Group for VPC Endpoint 
   EndpointSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -241,95 +220,60 @@ Resources:
           ToPort: 443
           CidrIp: 11.0.0.0/16
   
-  EndpointSSM:
-    Type: AWS::EC2::VPCEndpoint
-    Properties:
-      PrivateDnsEnabled: true
-      SecurityGroupIds:
-        - !Ref EndpointSecurityGroup
-      ServiceName: !Sub com.amazonaws.${AWS::Region}.ssm
-      SubnetIds:
-        - !Ref KeycloakPrivateSubnetA
-      VpcEndpointType: Interface
-      VpcId: !Ref VPC
+  # # Endpoint for Systems Manager
+  # EndpointSSM:
+  #   Type: AWS::EC2::VPCEndpoint
+  #   Properties:
+  #     PrivateDnsEnabled: true
+  #     SecurityGroupIds:
+  #       - !Ref EndpointSecurityGroup
+  #     ServiceName: !Sub com.amazonaws.${AWS::Region}.ssm
+  #     SubnetIds:
+  #       - !Ref KeycloakPrivateSubnetA
+  #     VpcEndpointType: Interface
+  #     VpcId: !Ref VPC
 
-  EndpointSSMMessages:
-    Type: AWS::EC2::VPCEndpoint
-    Properties:
-      PrivateDnsEnabled: true
-      SecurityGroupIds:
-        - !Ref EndpointSecurityGroup
-      ServiceName: !Sub com.amazonaws.${AWS::Region}.ssmmessages
-      SubnetIds:
-        - !Ref KeycloakPrivateSubnetA
-      VpcEndpointType: Interface
-      VpcId: !Ref VPC
+  # EndpointSSMMessages:
+  #   Type: AWS::EC2::VPCEndpoint
+  #   Properties:
+  #     PrivateDnsEnabled: true
+  #     SecurityGroupIds:
+  #       - !Ref EndpointSecurityGroup
+  #     ServiceName: !Sub com.amazonaws.${AWS::Region}.ssmmessages
+  #     SubnetIds:
+  #       - !Ref KeycloakPrivateSubnetA
+  #     VpcEndpointType: Interface
+  #     VpcId: !Ref VPC
 
-  EndpointEC2Messages:
-    Type: AWS::EC2::VPCEndpoint
-    Properties:
-      PrivateDnsEnabled: true
-      SecurityGroupIds:
-        - !Ref EndpointSecurityGroup
-      ServiceName: !Sub com.amazonaws.${AWS::Region}.ec2messages
-      SubnetIds:
-        - !Ref KeycloakPrivateSubnetA
-      VpcEndpointType: Interface
-      VpcId: !Ref VPC
+  # EndpointEC2Messages:
+  #   Type: AWS::EC2::VPCEndpoint
+  #   Properties:
+  #     PrivateDnsEnabled: true
+  #     SecurityGroupIds:
+  #       - !Ref EndpointSecurityGroup
+  #     ServiceName: !Sub com.amazonaws.${AWS::Region}.ec2messages
+  #     SubnetIds:
+  #       - !Ref KeycloakPrivateSubnetA
+  #     VpcEndpointType: Interface
+  #     VpcId: !Ref VPC
   
-  # IAM Role for SSM
-  EC2IAMRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: !Sub SSM-role
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service:
-                - ec2.amazonaws.com
-            Action:
-              - sts:AssumeRole
-      Path: /
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
-
-  EC2InstanceProfile:
-    Type: AWS::IAM::InstanceProfile
-    Properties:
-      Path: /
-      Roles:
-        - Ref: EC2IAMRole
-      InstanceProfileName: EC2InstanceProfile
-
-  EC2SecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: EC2SecurityGroup
-      VpcId: !Ref VPC
-      Tags:
-        - Key: Name
-          Value: FhirEC2SecurityGroup
-
-  # EC2Instance:
-    # Type: AWS::EC2::Instance
-    # Properties:
-    #   ImageId: ami-02b92c281a4d3dc79
-    #   InstanceType: t2.micro
-    #   SubnetId: !Ref PrivateSubnet
-    #   SecurityGroupIds:
-    #     - !Ref EC2SecurityGroup
-    #   IamInstanceProfile: !Ref EC2InstanceProfile
-    #   BlockDeviceMappings:
-    #     - DeviceName: /dev/xvda
-    #       Ebs:
-    #         VolumeSize: 100
-    #         VolumeType: gp2
-    #   Tags:
-    #     - Key: Name
-    #       Value: FHIR Instance for checking VPN 
-
+  # # IAM Role for SSM
+  # EC2IAMRole:
+  #   Type: AWS::IAM::Role
+  #   Properties:
+  #     RoleName: !Sub SSM-role
+  #     AssumeRolePolicyDocument:
+  #       Version: '2012-10-17'
+  #       Statement:
+  #         - Effect: Allow
+  #           Principal:
+  #             Service:
+  #               - ec2.amazonaws.com
+  #           Action:
+  #             - sts:AssumeRole
+  #     Path: /
+  #     ManagedPolicyArns:
+  #       - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
 
   # VPC Endpoint for Private API GW
   EndpointPrivateAPIGW:
@@ -361,7 +305,7 @@ Resources:
         CloudwatchLogGroup: /aws/clientvpn
         CloudwatchLogStream: connection-log
       ServerCertificateArn: arn:aws:acm:us-west-2:823715351041:certificate/87b9db24-6faa-4c85-be53-532c098c9133
-      SplitTunnel: true
+      SplitTunnel: false
       VpcId: !Ref VPC
 
   # Association to Client VPC Endpoint
@@ -383,3 +327,19 @@ Resources:
       ClientVpnEndpointId: !Ref ClientVpnEndpoint
       AuthorizeAllGroups: true
       TargetNetworkCidr: 11.0.0.0/16
+  
+
+  # VPC Endpoint for S3 
+  S3VpcEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      PrivateDnsEnabled: false
+      SecurityGroupIds:
+        - !Ref EndpointSecurityGroup
+      ServiceName: !Sub com.amazonaws.${AWS::Region}.s3
+      SubnetIds:
+        - !Ref S3PrivateSubnetA
+        - !Ref S3PrivateSubnetB
+      VpcEndpointType: Interface
+      VpcId: !Ref VPC
+

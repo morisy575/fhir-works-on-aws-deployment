@@ -6157,7 +6157,7 @@ fecha@^4.2.0:
 fhir-works-on-aws-authz-rbac@./.yalc/fhir-works-on-aws-authz-rbac:
   version "5.0.0"
   dependencies:
-    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-authz-rbac-5.0.0-184870fc-867e-41b6-8f60-306f1344d401-1660012823461/node_modules/fhir-works-on-aws-authz-rbac/.yalc/fhir-works-on-aws-interface"
+    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-authz-rbac-5.0.0-43ada14d-5742-4062-a4a5-5d3affc2e7bf-1660552737757/node_modules/fhir-works-on-aws-authz-rbac/.yalc/fhir-works-on-aws-interface"
     jsonwebtoken "^8.5.1"
     lodash "^4.17.20"
 
@@ -6199,7 +6199,7 @@ fhir-works-on-aws-persistence-ddb@./.yalc/fhir-works-on-aws-persistence-ddb:
     aws-elasticsearch-connector "^8.2.0"
     aws-sdk "^2.1000.0"
     aws-xray-sdk "^3.3.3"
-    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-persistence-ddb-3.11.0-7a28d826-8051-47f0-8d53-4805dfd63da8-1660012823499/node_modules/fhir-works-on-aws-persistence-ddb/.yalc/fhir-works-on-aws-interface"
+    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-persistence-ddb-3.11.0-f2e9817e-842a-4e18-a511-36a416dee0f4-1660552737796/node_modules/fhir-works-on-aws-persistence-ddb/.yalc/fhir-works-on-aws-interface"
     flat "^5.0.2"
     lodash "^4.17.20"
     mime-types "^2.1.26"
@@ -6218,7 +6218,7 @@ fhir-works-on-aws-routing@./.yalc/fhir-works-on-aws-routing:
     cors "^2.8.5"
     errorhandler "^1.5.1"
     express "^4.17.1"
-    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-routing-6.5.0-e49a0579-fac9-429c-bf67-0c5cce013666-1660012823539/node_modules/fhir-works-on-aws-routing/.yalc/fhir-works-on-aws-interface"
+    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-routing-6.5.0-b75ecef2-b250-4cef-b42e-1f84a8ed8c1f-1660552737828/node_modules/fhir-works-on-aws-routing/.yalc/fhir-works-on-aws-interface"
     flat "^5.0.0"
     http-errors "^1.8.0"
     lodash "^4.17.15"
@@ -6237,7 +6237,7 @@ fhir-works-on-aws-search-es@./.yalc/fhir-works-on-aws-search-es:
     aws-sdk "^2.1072.0"
     aws-xray-sdk "^3.3.4"
     date-fns "^2.19.0"
-    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-search-es-3.12.0-6b38b910-92e3-4885-9939-68373e956b5c-1660012823565/node_modules/fhir-works-on-aws-search-es/.yalc/fhir-works-on-aws-interface"
+    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-search-es-3.12.0-e6f63055-df9f-4211-b559-ebc45bcd52a9-1660552737849/node_modules/fhir-works-on-aws-search-es/.yalc/fhir-works-on-aws-interface"
     flat "^5.0.2"
     lodash "^4.17.20"
     nearley "^2.20.0"
@@ -10741,10 +10741,10 @@ serve-static@1.15.0:
     parseurl "~1.3.3"
     send "0.18.0"
 
-serverless-better-credentials@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/serverless-better-credentials/-/serverless-better-credentials-1.1.2.tgz#a4f85a96d144ec49deaf8b9e768beccd3bdc2860"
-  integrity sha512-a3iQGN1RuhqynE+heZncOPQEdYXAC9k2fdpx2q7PG2rJKu2yo26VcfBpNH1V8OrNi16nuvBAMKQe9E/khkRuUg==
+serverless-better-credentials@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/serverless-better-credentials/-/serverless-better-credentials-1.1.3.tgz#70553f4e6ae846d346677f3ce31455035f9dec49"
+  integrity sha512-specJ3DH70DkstDo0NibL7rETHdrMQ6RLbL1lz0ijjmx6fuV/8XAd6StxoNoXoCCbTT0lXU+OIlfDiyivuca6A==
   dependencies:
     open "^8.4.0"
 
