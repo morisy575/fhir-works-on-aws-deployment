@@ -3494,10 +3494,10 @@ aws-sdk@^2.1136.0:
     uuid "8.0.0"
     xml2js "0.4.19"
 
-aws-sdk@^2.1174.0:
-  version "2.1190.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1190.0.tgz#9ca291c27ff9dc3428a9211048754df9d01734c9"
-  integrity sha512-VJ3kpqjqww3u2OUOpvDA4EWU2HYetk0/5PQONqXR9N4dAvs8BP/Rv4BoYM/9m4rfhdBEMWizdye7epbBNxb4ZQ==
+aws-sdk@^2.1195.0:
+  version "2.1196.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1196.0.tgz#28951e1c742373397514f295f742eb3a9497c02d"
+  integrity sha512-iOGhCY5IqGfHCJ70p0H/uxkXDh/96KanAMfhnGGbIKbpVliuEV7SYxTfsWORaaUHey+N8FE6OMKfzo7F4X+wQg==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -4839,10 +4839,10 @@ date-fns@^2.19.0:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.28.0.tgz#9570d656f5fc13143e50c975a3b6bbeb46cd08b2"
   integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
 
-dayjs@^1.11.3:
-  version "1.11.4"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.4.tgz#3b3c10ca378140d8917e06ebc13a4922af4f433e"
-  integrity sha512-Zj/lPM5hOvQ1Bf7uAvewDaUcsJoI6JmNqmHhHl3nyumwe0XHwt8sWdOVAPACJzCebL8gQCi+K49w7iKWnGwX9g==
+dayjs@^1.11.5:
+  version "1.11.5"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.5.tgz#00e8cc627f231f9499c19b38af49f56dc0ac5e93"
+  integrity sha512-CAdX5Q3YW3Gclyo5Vpqkgpj8fSdLQcRuzfX6mC6Phy0nfJ0eGYOeS7m4mt2plDWLAtA4TqTakvbboHvUxfe4iA==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.9:
   version "2.6.9"
@@ -6123,7 +6123,7 @@ fast-xml-parser@3.19.0:
   resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-3.19.0.tgz#cb637ec3f3999f51406dd8ff0e6fc4d83e520d01"
   integrity sha512-4pXwmBplsCPv8FOY1WRakF970TjNGnGnfbOnLqjlYvMiF1SR3yOHyxMR/YCXpPTOspNF5gwudqktIP4VsWkvBg==
 
-fastest-levenshtein@^1.0.12:
+fastest-levenshtein@^1.0.16:
   version "1.0.16"
   resolved "https://registry.yarnpkg.com/fastest-levenshtein/-/fastest-levenshtein-1.0.16.tgz#210e61b6ff181de91ea9b3d1b84fdedd47e034e5"
   integrity sha512-eRnCtTTtGZFpQCwhJiUOuxPQWRXVKYDn0b2PeHfXL6/Zi53SLAzAHfVhVWK2AryC/WH05kGfxhFIPvTF0SXQzg==
@@ -6157,7 +6157,7 @@ fecha@^4.2.0:
 fhir-works-on-aws-authz-rbac@./.yalc/fhir-works-on-aws-authz-rbac:
   version "5.0.0"
   dependencies:
-    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-authz-rbac-5.0.0-43ada14d-5742-4062-a4a5-5d3affc2e7bf-1660552737757/node_modules/fhir-works-on-aws-authz-rbac/.yalc/fhir-works-on-aws-interface"
+    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-authz-rbac-5.0.0-e96b3dec-c9a0-4f9e-8407-cae8383c3259-1660733155143/node_modules/fhir-works-on-aws-authz-rbac/.yalc/fhir-works-on-aws-interface"
     jsonwebtoken "^8.5.1"
     lodash "^4.17.20"
 
@@ -6199,7 +6199,7 @@ fhir-works-on-aws-persistence-ddb@./.yalc/fhir-works-on-aws-persistence-ddb:
     aws-elasticsearch-connector "^8.2.0"
     aws-sdk "^2.1000.0"
     aws-xray-sdk "^3.3.3"
-    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-persistence-ddb-3.11.0-f2e9817e-842a-4e18-a511-36a416dee0f4-1660552737796/node_modules/fhir-works-on-aws-persistence-ddb/.yalc/fhir-works-on-aws-interface"
+    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-persistence-ddb-3.11.0-1c8fbb9e-d8a2-4732-b683-472eccf45e87-1660733155187/node_modules/fhir-works-on-aws-persistence-ddb/.yalc/fhir-works-on-aws-interface"
     flat "^5.0.2"
     lodash "^4.17.20"
     mime-types "^2.1.26"
@@ -6218,7 +6218,7 @@ fhir-works-on-aws-routing@./.yalc/fhir-works-on-aws-routing:
     cors "^2.8.5"
     errorhandler "^1.5.1"
     express "^4.17.1"
-    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-routing-6.5.0-b75ecef2-b250-4cef-b42e-1f84a8ed8c1f-1660552737828/node_modules/fhir-works-on-aws-routing/.yalc/fhir-works-on-aws-interface"
+    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-routing-6.5.0-23194476-b143-499f-ac68-71716030f80b-1660733155223/node_modules/fhir-works-on-aws-routing/.yalc/fhir-works-on-aws-interface"
     flat "^5.0.0"
     http-errors "^1.8.0"
     lodash "^4.17.15"
@@ -6237,7 +6237,7 @@ fhir-works-on-aws-search-es@./.yalc/fhir-works-on-aws-search-es:
     aws-sdk "^2.1072.0"
     aws-xray-sdk "^3.3.4"
     date-fns "^2.19.0"
-    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-search-es-3.12.0-e6f63055-df9f-4211-b559-ebc45bcd52a9-1660552737849/node_modules/fhir-works-on-aws-search-es/.yalc/fhir-works-on-aws-interface"
+    fhir-works-on-aws-interface "file:../../../../../../usr/local/share/Library/Caches/Yarn/v6/npm-fhir-works-on-aws-search-es-3.12.0-3ed0b2ca-49a7-4902-b29f-eadf2c192594-1660733155252/node_modules/fhir-works-on-aws-search-es/.yalc/fhir-works-on-aws-interface"
     flat "^5.0.2"
     lodash "^4.17.20"
     nearley "^2.20.0"
@@ -10866,10 +10866,10 @@ serverless-webpack@^5.3.1:
   optionalDependencies:
     ts-node ">= 8.3.0"
 
-serverless@^3.21.0:
-  version "3.21.0"
-  resolved "https://registry.yarnpkg.com/serverless/-/serverless-3.21.0.tgz#1e2009f08ec95d96f61122846f680784280f4e63"
-  integrity sha512-swDn12DWEN3jyb/DPrr+a5Gy+DcV+cI+Yuii+zjxGTPGrEDfLymPBEtx3e7YmxKWn174ekmRCfRNbbtffo3LcQ==
+serverless@^3.22.0:
+  version "3.22.0"
+  resolved "https://registry.yarnpkg.com/serverless/-/serverless-3.22.0.tgz#b4dde8142ebd72ba08a8f264cc2b900ad3ecdbaf"
+  integrity sha512-S/C4jbTFW95AwAw2wSqQa28FCordHwj+sUt3SHPgLNq0ryWcagR03C7vvIEnunmb7Rj5uEIcvArmjuaYNYN0+w==
   dependencies:
     "@serverless/dashboard-plugin" "^6.2.2"
     "@serverless/platform-client" "^4.3.2"
@@ -10877,7 +10877,7 @@ serverless@^3.21.0:
     ajv "^8.11.0"
     ajv-formats "^2.1.1"
     archiver "^5.3.1"
-    aws-sdk "^2.1174.0"
+    aws-sdk "^2.1195.0"
     bluebird "^3.7.2"
     cachedir "^2.3.0"
     chalk "^4.1.2"
@@ -10885,13 +10885,13 @@ serverless@^3.21.0:
     ci-info "^3.3.2"
     cli-progress-footer "^2.3.2"
     d "^1.0.1"
-    dayjs "^1.11.3"
+    dayjs "^1.11.5"
     decompress "^4.2.1"
     dotenv "^10.0.0"
     dotenv-expand "^5.1.0"
     essentials "^1.2.0"
     ext "^1.6.0"
-    fastest-levenshtein "^1.0.12"
+    fastest-levenshtein "^1.0.16"
     filesize "^8.0.7"
     fs-extra "^9.1.0"
     get-stdin "^8.0.0"
@@ -10920,7 +10920,7 @@ serverless@^3.21.0:
     supports-color "^8.1.1"
     tar "^6.1.11"
     timers-ext "^0.1.7"
-    type "^2.6.0"
+    type "^2.7.2"
     untildify "^4.0.0"
     uuid "^8.3.2"
     yaml-ast-parser "0.0.43"
@@ -11930,6 +11930,11 @@ type@^2.1.0, type@^2.5.0, type@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/type/-/type-2.6.0.tgz#3ca6099af5981d36ca86b78442973694278a219f"
   integrity sha512-eiDBDOmkih5pMbo9OqsqPRGMljLodLcwd5XD5JbtNB0o89xZAwynY9EdCDsJU7LtcVCClu9DvM7/0Ep1hYX3EQ==
+
+type@^2.7.2:
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/type/-/type-2.7.2.tgz#2376a15a3a28b1efa0f5350dcf72d24df6ef98d0"
+  integrity sha512-dzlvlNlt6AXU7EBSfpAscydQ7gXB+pPGsPnfJnZpiNJBDj7IaJzQlBZYGdEi4R9HmPdBv2XmWJ6YUtoTa7lmCw==
 
 typedarray-to-buffer@^3.1.5:
   version "3.1.5"
